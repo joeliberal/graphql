@@ -1,6 +1,6 @@
 import graphene
 from graphene_django.types import DjangoObjectType, ObjectType
-from .models import Comment
+from comments.models import Comment
 
 class CommentType(DjangoObjectType):
     class Meta:
