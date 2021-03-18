@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'my_graphql',
     #3rd
     'graphene_django',
+
 ]
 
 MIDDLEWARE = [
