@@ -37,5 +37,27 @@ class CreateUser(graphene.Mutation):
         user_instance = User.objects.create(username = input.username, email = input.email, password=input.password)
         return CreateUser(user=user_instance)
 
+
+class UpdateUser(graphene.Mutation):
+    class Arguments:
+        id = graphene.Int(required=True)
+        input = UserInput(required=True)
+
+    user = graphene.Field(UserType)
+    ok = graphene.Boolean(default_value=True)
+
+    def mutate(parent, info, id, input=None):
+        user_instance = User.objects.get(id=id)
+        user_instance.username = input.username if input.username is not None else user_instance.username
+        user_instance.email = input.email if input.email is not None else user_instance.email
+        user_instance.password = input.password if input.password is not None else user_instance.password
+        user_instance.save()
+        ok = True
+        return UpdateUser(user=user_instance, ok=ok)
+
+
+
 class UserMutate(ObjectType):
     create_user = CreateUser.Field()
+    update_user = UpdateUser.Field()
+    
