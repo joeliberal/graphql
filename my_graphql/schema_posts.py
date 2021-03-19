@@ -1,6 +1,7 @@
 import graphene
 from graphene_django.types import DjangoObjectType,ObjectType
 from posts.models import Post
+from django.contrib.auth.models import User
 
 
 class PostsTyppe(DjangoObjectType):
@@ -27,3 +28,4 @@ class PostsQuery(ObjectType):
         if id is not None:
             return Post.objects.get(id=id)
         return None
+

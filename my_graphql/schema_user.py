@@ -56,8 +56,20 @@ class UpdateUser(graphene.Mutation):
         return UpdateUser(user=user_instance, ok=ok)
 
 
+class DeleteUser(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID()
+    
+    user = graphene.Field(UserType)
+    ok = graphene.Boolean(default_value=False)
+
+    def mutate(parent, info, id):
+        user_instance = User.objects.get(id=id)
+        user_instance.delete()
+        ok = True
+        return DeleteUser(user=user_instance, ok=ok)
 
 class UserMutate(ObjectType):
     create_user = CreateUser.Field()
     update_user = UpdateUser.Field()
-    
+    delete_user = DeleteUser.Field()    
