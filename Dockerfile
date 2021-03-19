@@ -10,4 +10,4 @@ RUN pip install -r requirments.txt
 
 EXPOSE 8000
 
-CDM ["gunicorn","A.wsgi","*:8000"]
+CMD ["gunicorn","A.wsgi","*:8000"]
