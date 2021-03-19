@@ -1,4 +1,5 @@
 import graphene
+import graphql_jwt
 from django.contrib.auth.models import User
 from graphene_django.types import DjangoObjectType, ObjectType
 
@@ -73,3 +74,7 @@ class UserMutate(ObjectType):
     create_user = CreateUser.Field()
     update_user = UpdateUser.Field()
     delete_user = DeleteUser.Field()    
+    
+    token_auth = graphql_jwt.ObtainJSONWebToken.Field()
+    verify_token = graphql_jwt.Verify.Field()
+    refresh_token = graphql_jwt.Refresh.Field()
