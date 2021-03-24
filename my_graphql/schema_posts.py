@@ -75,9 +75,9 @@ class PostUpdate(graphene.Mutation):
     def mutate(parent, info, id, input=None):
         post_instance = Post.objects.get(id=id)
 
-        post_instance.slug  = inpiut.slug   if inpiut.slug id not None else post_instance.slug
-        post_instance.title = inpiut.title   if inpiut.title id not None else post_instance.title
-        post_instance.draft = inpiut.draft   if inpiut.draft id not None else post_instance.draft 
+        post_instance.slug  = input.slug   if input.slug is not None else post_instance.slug
+        post_instance.title = input.title   if input.title is not None else post_instance.title
+        post_instance.draft = input.draft   if input.draft is not None else post_instance.draft 
 
         ok = True
         return PostUpdate(post=post_instance, ok=ok)
